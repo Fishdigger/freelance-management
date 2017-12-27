@@ -1,0 +1,25 @@
+{
+  "name": "freelance-management",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fishdigger/freelance-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fishdigger/freelance-management/issues"
+  },
+  "homepage": "https://github.com/Fishdigger/freelance-management#readme",
+  "private": true,
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2",
+    "mongodb": "^3.0.1"
+  }
+}
