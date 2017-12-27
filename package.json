@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "express": "^4.16.2",
-    "mongodb": "^3.0.1"
+    "mongodb": "^3.0.1",
+    "nodemon": "^1.14.3",
+    "title-case": "^2.1.1"
   }
 }
