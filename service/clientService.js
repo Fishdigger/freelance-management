@@ -46,8 +46,8 @@ module.exports.getByName = (fullName) => {
 
 module.exports.insert = (client) => {
     return mongo.connect().then((db) => {
-        module.exports.get({}).then((data) => {
-            let oldId = data.sort({id: -1}).shift().id;
+        db.collection(collection).findOne({}, {sort: {"id": -1}}).then((data) => {
+            let oldId = data.id;
             let id = oldId + 1;
             client.id = id;
             return db.collection(collection).insertOne(client);
