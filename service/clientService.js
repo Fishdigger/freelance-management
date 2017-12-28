@@ -3,6 +3,19 @@ const titleCase = require("title-case");
 
 const collection = "Clients"
 
+const validateEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+module.exports.validateClient = (client) => {
+    let errors = [];
+    if (client.firstName.length < 2) errors.push("First name is required");
+    if (client.lastName.length < 2) errors.push("Last name is required");
+    if (!validateEmail(client.email)) errors.push("Email is invalid");
+    return errors;
+}
+
 module.exports.getAll = () => {
     return mongo.connect().then((db) => {
         return db.collection(collection).find({}).toArray();
@@ -29,4 +42,27 @@ module.exports.getByName = (fullName) => {
     return mongo.connect().then((db) => {
         return db.collection(collection).findOne(query);
     });
+}
+
+module.exports.insert = (client) => {
+    return mongo.connect().then((db) => {
+        module.exports.get({}).then((data) => {
+            let oldId = data.sort({id: -1}).shift().id;
+            let id = oldId + 1;
+            client.id = id;
+            return db.collection(collection).insertOne(client);
+        });
+    });
+}
+
+module.exports.update = (client) => {
+    return mongo.connect().then((db) => {
+        return db.collection(collection).updateOne({id: client.id}, client);
+    })
+}
+
+module.exports.delete = (clientID) => {
+    return mongo.connect().then((db) => {
+        return db.collection(collection).deleteOne({id: clientID});
+    })
 }
