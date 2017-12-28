@@ -43,6 +43,12 @@ clientRouter.delete("/:id", (req, res) => {
     })
 });
 
-//clientRouter.put()
+clientRouter.put("/:id", (req, res) => {
+    let id = parseInt(req.params.id);
+    service.update(req.body, id).then((err, result) => {
+        if (err) res.json(err);
+        else res.json("ok");
+    });
+});
 
 module.exports = clientRouter;

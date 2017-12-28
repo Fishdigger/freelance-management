@@ -11,5 +11,5 @@ module.exports.connect = () => {
     return mongoClient.connect(url, auth).then((client) => {
         db = client.db(db_name);
         return db;
-    })
+    });
 }

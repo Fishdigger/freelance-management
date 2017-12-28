@@ -55,9 +55,9 @@ module.exports.insert = (client) => {
     });
 }
 
-module.exports.update = (client) => {
+module.exports.update = (client, id) => {
     return mongo.connect().then((db) => {
-        return db.collection(collection).updateOne({id: client.id}, client);
+        return db.collection(collection).replaceOne({id: id}, client);
     })
 }
 
